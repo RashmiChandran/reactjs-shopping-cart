@@ -1,3 +1,13 @@
+# A simple ReactJS Shopping app
+
+## Features included:
+
+- Tailwind Css
+- Context API
+- Local Storage
+
+Project is under progress...
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
