@@ -1,11 +1,18 @@
 # A simple ReactJS Shopping app
 
-## Features included:
+## Technology included:
 
 - Tailwind Css
 - Context API
 - Local Storage
+- React icons
+- Axios
 
+## Features included:
+
+- Product Page
+- Cart Page
+- Add more quantities
 Project is under progress...
 
 # Getting Started with Create React App

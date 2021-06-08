@@ -6,7 +6,11 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+@layer components {
+  .cart-badge{
+    @apply rounded-full h-5 w-5 flex items-center justify-center bg-red-500 text-white relative -top-8 left-3;
+  }
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -36,3 +40,5 @@
     transform: rotate(360deg);
   }
 }
+
+
