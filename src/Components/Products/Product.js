@@ -12,8 +12,8 @@ const Product = ({ product, addToCart, removeFromCart, incrementItem, decrementI
   return (
     <div className="shadow flex flex-col items-center p-3">
       <img src={productItem.smallImage} className="w-64 h-48" />
-      <p>{productItem.productName}</p>
-      <p>{productItem.productPrice}</p>
+      <p className="font-medium capitalize">{productItem.productName}</p>
+      <p>${productItem.productPrice}</p>
       {productItem.isAddedtoCart ? (
         <div className="flex grid-cols-2 gap-2 grid w-4/5">
           <div className="flex items-center">
