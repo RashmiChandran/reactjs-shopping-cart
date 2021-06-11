@@ -3,7 +3,7 @@ import Product from "./Product";
 import Axios from "axios";
 import { random, commerce, datatype } from "faker";
 import { CartContext } from "../../Context/CartContext";
-import { ADD_CART_ITEM, REMOVE_CART_ITEM } from "../../Context/action-types";
+import { ADD_CART_ITEM, REMOVE_CART_ITEM, UPDATE_CART_ITEM_COUNT } from "../../Context/action-types";
 
 const ProductList = () => {
   const apiKey = "563492ad6f917000010000018f3e254bdba740aab8247cce67fb3648";
@@ -37,6 +37,10 @@ const ProductList = () => {
     fetchProducts();
   }, []);
 
+  useEffect(()=>{
+    console.log("cart updated",cartItem,product);
+  },[cartItem]);
+
   const addToCart = item =>{
     item.isAddedtoCart = true;
     item.count = 1;
@@ -56,31 +60,41 @@ const ProductList = () => {
     
   }
   const incrementItem = item =>{
-    console.log(item)
+    item.isAddedtoCart = true;
     if(item.count > 0){
       item.count = item.count+ 1;
     }
     var index = product.findIndex(x=> x.id === item.id);
     
-      setProduct([
-           ...product.slice(0,index),
-           Object.assign({}, product[index], item),
-           ...product.slice(index+1)
-        ]);
+      // setProduct([
+      //      ...product.slice(0,index),
+      //      Object.assign({}, product[index], item),
+      //      ...product.slice(index+1)
+      //   ]);
+        dispatch({
+          type: UPDATE_CART_ITEM_COUNT,
+          payload: item
+        })  
   }
 
   const decrementItem = item =>{
+    item.isAddedtoCart = true;
     if(item.count > 0){
       item.count = item.count - 1;
     }
     var index = product.findIndex(x=> x.id === item.id);
     
-      setProduct([
-           ...product.slice(0,index),
-           Object.assign({}, product[index], item),
-           ...product.slice(index+1)
-        ]);
+      // setProduct([
+      //      ...product.slice(0,index),
+      //      Object.assign({}, product[index], item),
+      //      ...product.slice(index+1)
+      //   ]);
+        dispatch({
+          type: UPDATE_CART_ITEM_COUNT,
+          payload: item
+        })  
   }
+
   return (
     <div>
       <div className="grid lg:grid-cols-4 gap-4 md:grid-cols-3 sm:grid-cols-2">
