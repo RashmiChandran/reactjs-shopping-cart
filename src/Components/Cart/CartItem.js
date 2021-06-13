@@ -7,14 +7,14 @@ const CartItem = ({cartObj, removeFromCart}) => {
     
     
     return (
-        <div className="cart-card">
-            <div><button onClick={()=> removeFromCart(cartObj)}><MdClose/></button></div>
-            <img src={cartObj.smallImage} className="w-36 h-30" />
+        <div className="cart-item">
+            <img src={cartObj.smallImage} className="w-36 h-30 ml-0" />
             <div>
-                <p>{cartObj.productName}</p>
+                <p className="font-medium capitalize">{cartObj.productName}</p>
                 <p>Quantity: {cartObj.count}</p>
             </div>
-            <p>{cartObj.productPrice}</p>
+            <p className="text-green-700 font-medium">₹{cartObj.productPrice}</p>
+            <div className="absolute top-2 right-2"><button onClick={()=> removeFromCart(cartObj)} className="focus:outline-none"><MdClose/></button></div>
             
         </div>
     )

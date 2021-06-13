@@ -36,7 +36,7 @@ function App() {
 
     <CartContext.Provider value={{cartItem, dispatch}}>
       <header className="p-2 mb-4 border-b-2">
-        <h1 className="text-lg font-bold">Toy shop</h1>
+        <h1 className="text-2xl font-bold font-serif">Toy shop</h1>
         <button className="right-4 top-3 absolute focus:outline-none" onClick={openCart}>
           <FaCartPlus className="w-5 h-5" />
           <span className="cart-badge">{totalCartItems}</span>

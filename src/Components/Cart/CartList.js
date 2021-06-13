@@ -4,6 +4,7 @@ import {CartContext} from "../../Context/CartContext";
 import CartItem from './CartItem';
 import { MdClose } from "react-icons/md";
 import {  REMOVE_CART_ITEM } from "../../Context/action-types";
+import { FaCartPlus } from "react-icons/fa";
 
 
 const CartList = ({closeCart,show}) => {
@@ -38,15 +39,18 @@ const CartList = ({closeCart,show}) => {
 
     return (
             <div className={showHideClassName}>
-            <div  className="absolute right-2/4 top-4"><button onClick={()=> closeCart()}><MdClose/></button></div>
-                <h1 className="text-lg font-bold">Cart {totalCartItems}</h1>
+            <div  className="absolute right-3 top-6"><button onClick={()=> closeCart()} className="focus:outline-none"><MdClose className="w-5 h-5"/></button></div>
+                <div className="flex items-center justify-center py-4" ><FaCartPlus className="w-8 h-8"/> <span className="cart-count">{totalCartItems}</span>
+<h1 className="text-lg font-bold ml-2">Cart</h1></div>
                 <div className="cart-container">
                     {cartItem.length > 0 ? <div>{cartItem.map((items)=>(
                     <CartItem cartObj={items} key={items.id} removeFromCart={removeFromCart}/>
-                    ))}</div> : <p className="p-10 text-red-500 decoration-clone">Your cart is empty</p>}
+                    ))}</div> : <p className="p-10 text-red-500 decoration-clone font-semibold">Your cart is empty</p>}
                 </div>
                 <div className="checkout-container">
-                        <h2>Total</h2> <p>{totalPrice}</p>
+                        <div className="flex place-content-between mb-5">
+                            <h1>Total</h1> <p className="text-green-700 font-medium items-end text-xl">₹{totalPrice}</p>
+                        </div>
                         <button className="checkout-btn btn-green">Checkout</button>
                 </div>
             </div>

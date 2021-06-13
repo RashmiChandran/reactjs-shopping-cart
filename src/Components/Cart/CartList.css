@@ -2,7 +2,6 @@
     position: fixed;
     top: 0;
     right: 0;
-    width:50%;
     height: 100%;
     background: #fff;
   }
@@ -33,6 +32,12 @@
       @apply absolute bottom-0 shadow  w-full p-10 bg-white;
     }
     .cart-container{
-      @apply flex items-center flex-col h-4/5 overflow-y-auto overflow-x-hidden pt-5 pb-20;
+      @apply flex items-center flex-col h-4/5 overflow-y-auto overflow-x-hidden pt-5 pb-28;
+    }
+    .cart-count{
+      @apply rounded-full h-5 w-5 flex items-center justify-center bg-red-500 text-white relative top-4 -left-1.5;
+    }
+    .modal{
+      @apply w-screen lg:w-2/5 md:w-1/2;
     }
   }
