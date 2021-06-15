@@ -1,20 +1,23 @@
 import React, { useState, useEffect, useContext } from "react";
 import Product from "./Product";
-import Axios from "axios";
+
+import { CartContext } from "../../Services/Cart/CartContext";
+import { ADD_CART_ITEM, REMOVE_CART_ITEM, UPDATE_CART_ITEM_COUNT } from "../../Services/Cart/action-types";
+import { ProductContext } from "../../Services/Product/ProductContext";
+
+import { apiKey, productURL } from "../../Services/util"
 import { random, commerce, datatype } from "faker";
-import { CartContext } from "../../Context/CartContext";
-import { ADD_CART_ITEM, REMOVE_CART_ITEM, UPDATE_CART_ITEM_COUNT } from "../../Context/action-types";
+import Axios from "axios";
+
+import {FETCH_PRODUCTS} from "../../Services/Product/action-types";
 
 const ProductList = () => {
-  const apiKey = "563492ad6f917000010000018f3e254bdba740aab8247cce67fb3648";
-
-  const url = "https://api.pexels.com/v1/search?query=toys&per_page=8&page=1";
-
-  const [product, setProduct] = useState([]);
 
   const {cartItem, dispatch} = useContext(CartContext);
+  const {products, productDispatch} = useContext(ProductContext);
+  console.log("prrr", products)
   const fetchProducts = async () => {
-    const { data } = await Axios.get(url, {
+    const { data } = await Axios.get(productURL, {
       headers: {
         Authorization: apiKey,
       },
@@ -30,16 +33,20 @@ const ProductList = () => {
       count:0,
       id: datatype.uuid(),
     }));
-    setProduct(allProduct);
+     productDispatch({
+        type: FETCH_PRODUCTS,
+        payload: allProduct
+      });
   };
+  useEffect(()=>{
+    console.log("product updated", products)
+  },[products]);
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  useEffect(()=>{
-    console.log("cart updated",cartItem,product);
-  },[cartItem]);
+
 
   const addToCart = item =>{
     item.isAddedtoCart = true;
@@ -64,13 +71,6 @@ const ProductList = () => {
     if(item.count > 0){
       item.count = item.count+ 1;
     }
-    var index = product.findIndex(x=> x.id === item.id);
-    
-      // setProduct([
-      //      ...product.slice(0,index),
-      //      Object.assign({}, product[index], item),
-      //      ...product.slice(index+1)
-      //   ]);
         dispatch({
           type: UPDATE_CART_ITEM_COUNT,
           payload: item
@@ -82,13 +82,6 @@ const ProductList = () => {
     if(item.count > 0){
       item.count = item.count - 1;
     }
-    var index = product.findIndex(x=> x.id === item.id);
-    
-      // setProduct([
-      //      ...product.slice(0,index),
-      //      Object.assign({}, product[index], item),
-      //      ...product.slice(index+1)
-      //   ]);
         dispatch({
           type: UPDATE_CART_ITEM_COUNT,
           payload: item
@@ -98,7 +91,7 @@ const ProductList = () => {
   return (
     <div>
       <div className="grid lg:grid-cols-4 gap-4 md:grid-cols-3 sm:grid-cols-2 px-4">
-        {product.map((item) => (
+        {(products) !== undefined ? products.map((item) => (
             <Product 
             key={item.id} 
             product={item} 
@@ -106,7 +99,7 @@ const ProductList = () => {
             removeFromCart={removeFromCart}
             incrementItem={incrementItem}
             decrementItem={decrementItem} />
-        ))}
+        )): 'null'}
       </div>
     </div>
   );

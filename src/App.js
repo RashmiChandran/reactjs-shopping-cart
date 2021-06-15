@@ -4,11 +4,16 @@ import { FaCartPlus } from "react-icons/fa";
 import './App.css';
 import CartList from "./Components/Cart/CartList";
 import ProductList from './Components/Products/ProductList';
-import {CartContext} from "./Context/CartContext";
-import CartReducer from "./Context/reducer";
+import {CartContext} from "./Services/Cart/CartContext";
+import CartReducer from "./Services/Cart/reducer";
+import SortBy from "./Components/SortBy/SortBy";
+import ProductReducer from "./Services/Product/reducer";
+import {ProductContext} from "./Services/Product/ProductContext";
 
 function App() {
   const [cartItem, dispatch] = useReducer(CartReducer,[]);
+  const [products, productDispatch] = useReducer(ProductReducer,[]);
+
   const [cartModal, setCartModal] = useState({show:false});
   const [totalCartItems, setTotalCartItems] = useState(0);
 
@@ -33,7 +38,7 @@ function App() {
   },[cartItem]);
 
   return (
-
+  <ProductContext.Provider value={{products, productDispatch}}>
     <CartContext.Provider value={{cartItem, dispatch}}>
       <header className="p-2 mb-4 border-b-2">
         <h1 className="text-2xl font-bold font-serif">Toy shop</h1>
@@ -42,9 +47,13 @@ function App() {
           <span className="cart-badge">{totalCartItems}</span>
         </button>
       </header>
-      <ProductList/>
+      <SortBy/>
+      <ProductList>
+
+      </ProductList>
       <CartList closeCart={closeCarts} show={cartModal.show} />
     </CartContext.Provider>
+  </ProductContext.Provider>
   );
 }
 

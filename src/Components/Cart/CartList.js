@@ -1,9 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react'
 import "./CartList.css";
-import {CartContext} from "../../Context/CartContext";
+import {CartContext} from "../../Services/Cart/CartContext";
 import CartItem from './CartItem';
 import { MdClose } from "react-icons/md";
-import {  REMOVE_CART_ITEM } from "../../Context/action-types";
+import {  REMOVE_CART_ITEM } from "../../Services/Cart/action-types";
 import { FaCartPlus } from "react-icons/fa";
 
 

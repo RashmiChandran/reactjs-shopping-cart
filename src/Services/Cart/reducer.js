@@ -12,7 +12,6 @@ export default (state, action) =>{
             let updatedState=  [...state.slice(0,index),
             Object.assign({}, state[index], action.payload),
             ...state.slice(index+1)]
-            console.log("updatedState",updatedState)
             return updatedState;
         default:
             return state;
