@@ -30,7 +30,7 @@ const SortBy = () => {
     <div className="mr-10 mb-5">
       <label>Sort by:</label>
       <select value={sortValue} onChange={(ev) => handleChange(ev)} className="border ml-2 p-2">
-        <option value='1' disabled>Select</option>
+        <option value='1' disabled selected>Select</option>
         <option value="lowestprice">Lowest to Highest</option>
         <option value="highestprice">Highest to Lowest</option>
       </select>

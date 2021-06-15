@@ -14,7 +14,8 @@ import { random, commerce, datatype } from "faker";
 import Axios from "axios";
 
 import { FETCH_PRODUCTS } from "../../Services/Product/action-types";
-
+import SyncLoader from "react-spinners/SyncLoader";
+import "./ProductList.css"
 const ProductList = () => {
   const { cartItem, dispatch } = useContext(CartContext);
   const {products, productDispatch} = useContext(ProductContext);
@@ -101,7 +102,8 @@ const ProductList = () => {
                   decrementItem={decrementItem}
                 />
               ))
-            : "null"}
+            :  <div  className="spinner-container"><SyncLoader color="#10b981"/></div>}
+           
         </div>
       </div>
     );
