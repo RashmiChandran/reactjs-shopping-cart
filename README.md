@@ -1,19 +1,24 @@
 # A simple ReactJS Shopping app
 
+## Demo
+
+[rashmichandran.github.io/reactjs-shopping-cart/](https://rashmichandran.github.io/reactjs-shopping-cart/)
+
 ## Technology included:
 
-- Tailwind Css
+- Axios 
+- Tailwind CSS
 - Context API
-- Local Storage
 - React icons
-- Axios
+- React spinners
 
 ## Features included:
 
 - Product Page
 - Cart Page
-- Add more quantities
-Project is under progress...
+- Add more quantities from Product Page
+- Sort based on Product Price
+
 
 # Getting Started with Create React App
 
