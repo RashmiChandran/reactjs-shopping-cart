@@ -47,7 +47,9 @@ function App() {
           <span className="cart-badge">{totalCartItems}</span>
         </button>
       </header>
-      <SortBy/>
+      <div className="product-filter">
+        <SortBy/>
+      </div>
       <ProductList>
 
       </ProductList>

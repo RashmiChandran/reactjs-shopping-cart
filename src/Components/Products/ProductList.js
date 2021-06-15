@@ -34,6 +34,7 @@ const ProductList = () => {
       productPrice: commerce.price(),
       count: 0,
       id: datatype.uuid(),
+      age: datatype.number(6)
     }));
     productDispatch({
       type: FETCH_PRODUCTS,
@@ -45,6 +46,9 @@ const ProductList = () => {
     fetchProducts();
   }, []);
 
+  useEffect(()=>{
+    console.log("Cart item updated")
+  },[cartItem])
   const addToCart = (item) => {
     item.isAddedtoCart = true;
     item.count = 1;
