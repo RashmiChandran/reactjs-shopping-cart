@@ -1,11 +1,8 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import "./CartItem.css";
 import { MdClose } from "react-icons/md";
 
 const CartItem = ({cartObj, removeFromCart}) => {
-
-    
-    
     return (
         <div className="cart-item">
             <img src={cartObj.smallImage} className="w-36 h-30 ml-0" />
