@@ -1,5 +1,5 @@
 @layer components {
     .cart-item{
-        @apply relative py-8 px-8 m-5 max-w-sm mx-auto bg-white rounded-xl shadow-md space-y-1 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6;
+        @apply relative py-8 px-8 m-5 mx-auto bg-white rounded-xl shadow-md space-y-1 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6 max-w-xl;
     }
 }
