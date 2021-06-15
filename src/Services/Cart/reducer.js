@@ -9,10 +9,9 @@ export default (state, action) =>{
             return currrentState;
         case UPDATE_CART_ITEM_COUNT:
             var index = state.findIndex(x=> x.id === action.payload.id);
-            let updatedState=  [...state.slice(0,index),
-            Object.assign({}, state[index], action.payload),
+            return [...state.slice(0,index),
+            Object.assign( state[index], action.payload),
             ...state.slice(index+1)]
-            return updatedState;
         default:
             return state;
     }
