@@ -2,21 +2,23 @@ import React, { useState, useEffect, useContext } from "react";
 import Product from "./Product";
 
 import { CartContext } from "../../Services/Cart/CartContext";
-import { ADD_CART_ITEM, REMOVE_CART_ITEM, UPDATE_CART_ITEM_COUNT } from "../../Services/Cart/action-types";
+import {
+  ADD_CART_ITEM,
+  REMOVE_CART_ITEM,
+  UPDATE_CART_ITEM_COUNT,
+} from "../../Services/Cart/action-types";
 import { ProductContext } from "../../Services/Product/ProductContext";
 
-import { apiKey, productURL } from "../../Services/util"
+import { apiKey, productURL } from "../../Services/util";
 import { random, commerce, datatype } from "faker";
 import Axios from "axios";
 
-import {FETCH_PRODUCTS} from "../../Services/Product/action-types";
+import { FETCH_PRODUCTS } from "../../Services/Product/action-types";
 
 const ProductList = () => {
-
-  const {cartItem, dispatch} = useContext(CartContext);
+  const { cartItem, dispatch } = useContext(CartContext);
   const {products, productDispatch} = useContext(ProductContext);
-  console.log("prrr", products)
-  const fetchProducts = async () => {
+    const fetchProducts = async () => {
     const { data } = await Axios.get(productURL, {
       headers: {
         Authorization: apiKey,
@@ -30,79 +32,75 @@ const ProductList = () => {
       tinyImage: photo.src.tiny,
       productName: random.word(),
       productPrice: commerce.price(),
-      count:0,
+      count: 0,
       id: datatype.uuid(),
     }));
-     productDispatch({
-        type: FETCH_PRODUCTS,
-        payload: allProduct
-      });
+    productDispatch({
+      type: FETCH_PRODUCTS,
+      payload: allProduct,
+    });
   };
-  useEffect(()=>{
-    console.log("product updated", products)
-  },[products]);
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
-
-
-  const addToCart = item =>{
+  const addToCart = (item) => {
     item.isAddedtoCart = true;
     item.count = 1;
     dispatch({
       type: ADD_CART_ITEM,
-      payload: item
-    })
-  }
+      payload: item,
+    });
+  };
 
-  const removeFromCart = item =>{
+  const removeFromCart = (item) => {
     item.isAddedtoCart = false;
     item.count = 0;
-      dispatch({
-        type: REMOVE_CART_ITEM,
-        payload: item
-      })  
-    
-  }
-  const incrementItem = item =>{
+    dispatch({
+      type: REMOVE_CART_ITEM,
+      payload: item,
+    });
+  };
+  const incrementItem = (item) => {
     item.isAddedtoCart = true;
-    if(item.count > 0){
-      item.count = item.count+ 1;
+    if (item.count > 0) {
+      item.count = item.count + 1;
     }
-        dispatch({
-          type: UPDATE_CART_ITEM_COUNT,
-          payload: item
-        })  
-  }
+    dispatch({
+      type: UPDATE_CART_ITEM_COUNT,
+      payload: item,
+    });
+  };
 
-  const decrementItem = item =>{
+  const decrementItem = (item) => {
     item.isAddedtoCart = true;
-    if(item.count > 0){
+    if (item.count > 0) {
       item.count = item.count - 1;
     }
-        dispatch({
-          type: UPDATE_CART_ITEM_COUNT,
-          payload: item
-        })  
-  }
-
-  return (
-    <div>
-      <div className="grid lg:grid-cols-4 gap-4 md:grid-cols-3 sm:grid-cols-2 px-4">
-        {(products) !== undefined ? products.map((item) => (
-            <Product 
-            key={item.id} 
-            product={item} 
-            addToCart={addToCart} 
-            removeFromCart={removeFromCart}
-            incrementItem={incrementItem}
-            decrementItem={decrementItem} />
-        )): 'null'}
+    dispatch({
+      type: UPDATE_CART_ITEM_COUNT,
+      payload: item,
+    });
+  };
+    return (
+      <div>
+        <div className="grid lg:grid-cols-4 gap-4 md:grid-cols-3 sm:grid-cols-2 px-4">
+          {products.items !== undefined
+            ? products.items.map((item) => (
+                <Product
+                  key={item.id}
+                  product={item}
+                  addToCart={addToCart}
+                  removeFromCart={removeFromCart}
+                  incrementItem={incrementItem}
+                  decrementItem={decrementItem}
+                />
+              ))
+            : "null"}
+        </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default ProductList;

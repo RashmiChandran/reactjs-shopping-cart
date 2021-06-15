@@ -19,13 +19,12 @@ const SortBy = () => {
   };
 
   const handleChange = (event) => {
-    products.sort(compare[event.target.value]);
+    products.items.sort(compare[event.target.value]);
     setSortValue(event.target.value);
     productDispatch({
         type: FETCH_PRODUCTS,
-        payload: products
+        payload: products.items
       });
-      console.log("Sorted products", products)
   };
   return (
     <div>
