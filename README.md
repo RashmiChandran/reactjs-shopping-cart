@@ -2,7 +2,9 @@
 
 ## Demo
 
-[rashmichandran.github.io/reactjs-shopping-cart/](https://rashmichandran.github.io/reactjs-shopping-cart/)
+![Shopping cart Demo](demo/demo.gif)
+
+Link: [rashmichandran.github.io/reactjs-shopping-cart/](https://rashmichandran.github.io/reactjs-shopping-cart/)
 
 ## Technology included:
 
